@@ -80,7 +80,7 @@
 </view>
 
 <!-- 乘车人数 -->
-<view class="section passenger" style="border:{{passengerStyle}}">
+<view class="section passenger" style="border:{{passengerNumStyle}}">
   <view class="name">
     乘车人数
   </view>
@@ -126,6 +126,18 @@
   </view>  <!--Picker end-->
 </view>
 <!-- 申请用车时间 -->
+
+<!-- 是否城六区 -->
+<view class="section isOffWorkTime">
+  <view class="name">
+    是否城六区
+  </view>
+  <view class="content">
+    <switch  bindchange="switchIsCityChange"/>
+  </view>
+</view>
+<!-- 是否城六区 -->
+
 
 <!-- 出发地 -->
 <view class="section departure" style="border:{{originStyle}}">

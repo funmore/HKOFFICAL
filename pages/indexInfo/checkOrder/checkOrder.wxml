@@ -52,7 +52,17 @@
 </view>
 
 
-
+<view class="section">
+  <view class="name">
+     是否城六区
+  </view>
+  <view class="content">
+    <view wx:if="{{item.is_city}}">
+    是
+    </view>
+    <view wx:else> 否 </view>
+  </view>
+</view>
 
 <!-- 出发地 -->
 <view class="section departure">

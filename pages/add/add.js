@@ -10,6 +10,7 @@ Page({
     array_yongCheLeiXing:['管理','型号','研制'],
     index_yongCheLeiXing: 0,
     index_isOffWorkTime:0,
+    index_isCity:0,
 
     array_carType:['客车','货车'],
     index_carType:0,
@@ -41,6 +42,7 @@ Page({
     destStyle:'',
     reasonStyle:'',
     passengerStyle:'',
+    passengerNumStyle:'',
     passengerTelStyle:'',
     leadersStyle:'',
     managerStyle:'',
@@ -176,6 +178,12 @@ Page({
     this.setData({
       passengerNum:passengerNum+1
     })
+    var isPassengerNum=this.checkPassengerNum();
+    if(isPassengerNum==true){
+      this.setData({
+        passengerNumStyle:''
+      })
+    }
   },
   passengerTelInput:function(e){
     this.setData({
@@ -236,6 +244,17 @@ Page({
       index_oneOrTwoWay: index
     })
   },
+  switchIsCityChange:function(e){
+    var index=0;
+    if(e.detail.value){
+      index=1;
+    }else{
+      index=0;
+    }
+    this.setData({
+      index_isCity:index
+    })
+  },
   switchIsOffWorkTimeChange:function(e){
     var index=0;
     if(e.detail.value){
@@ -252,8 +271,32 @@ Page({
       workers: e.detail.value
     })
   },
+    checkPassengerNum(){
+        var isPassengerNum=true;
+        if(this.data.index_isCity==1){
+          if(this.data.passengerNum<3)
+            isPassengerNum=false;
+        }else{
+          if(this.data.passengerNum<1)
+            isPassengerNum=false;
+        }
+        return isPassengerNum;
+  },
   checkInput(){
+    var errorMessage=new Array();
+    errorMessage[0]="非城六区出行至少1人";
+    errorMessage[1]="城六区出行至少3人";
+    errorMessage[2]="所领导未选择";
+    errorMessage[3]="出发地为空";
+    errorMessage[4]="目的地为空";
+    errorMessage[5]="乘车联系人至少填写一个";
+    errorMessage[6]="手机号填写不合法";
+    errorMessage[7]="未选择型号助理员";
+    var errorMessageToShow =new Array();
+
+
     if(!this.data.origin.length){
+      errorMessageToShow.push(errorMessage[3]);
       this.setData({
         originStyle:'1rpx solid red'
       })
@@ -263,6 +306,7 @@ Page({
       })
     }
     if(!this.data.dest.length){
+      errorMessageToShow.push(errorMessage[4]);
         this.setData({
         destStyle:'1rpx solid red'
       })
@@ -273,6 +317,7 @@ Page({
     }
 
     if(this.data.passenger==''){
+      errorMessageToShow.push(errorMessage[5]);
         this.setData({
           passengerStyle:'1rpx solid red'
         })
@@ -282,8 +327,29 @@ Page({
         })
     }
 
+    var isPassengerNum=true;
+    if(this.data.index_isCity==0){
+      if(this.data.passengerNum<1){
+        isPassengerNum=false;
+        errorMessageToShow.push(errorMessage[0]);
+      }
+    }else{
+      if(this.data.passengerNum<3){
+        isPassengerNum=false;
+        errorMessageToShow.push(errorMessage[1]);
+      }
+    }
+
+    if(isPassengerNum==false){
+
+      this.setData({
+        passengerNumStyle:'1rpx solid red'
+      })
+    }
+
     var isLeadersNull=this.data.leaders.length==0&&this.data.index_isleader==1;
     if(isLeadersNull){
+      errorMessageToShow.push(errorMessage[2]);
       this.setData({
         leadersStyle:'1rpx solid red'
       })
@@ -295,6 +361,7 @@ Page({
     var isManagerSelected=true;
     if(this.data.index_yongCheLeiXing==1&&this.data.index_manager==0){
         isManagerSelected=false;
+        errorMessageToShow.push(errorMessage[7]);
         this.setData({
         managerStyle:'1rpx solid red'
       })
@@ -307,6 +374,7 @@ Page({
     
     var isMatch=/\d{11}/.test(this.data.passengerTel);
     if(!isMatch){
+        errorMessageToShow.push(errorMessage[6]);
         this.setData({
           passengerTelStyle:'1rpx solid red'
         })
@@ -315,12 +383,13 @@ Page({
           passengerTelStyle:''
         })
     }
-    if(!isLeadersNull&&this.data.origin.length&&this.data.dest.length&&this.data.passenger!=''&&isMatch&&isManagerSelected){
+    if(!isLeadersNull&&this.data.origin.length&&this.data.dest.length&&this.data.passenger!=''&&isMatch&&isManagerSelected&&isPassengerNum){
       return true;
     }else{
+      var content=errorMessageToShow.join("/");
       wx.showModal({
-            title: '填写信息',
-            content: '标红的为必填项，请完整填写！',
+            title: '申请信息有误',
+            content: content,
             showCancel: false
           });
       return false;
@@ -364,6 +433,7 @@ Page({
                      isweekend:data.index_isOffWorkTime,
                      isreturn:data.index_oneOrTwoWay,
                      workers:data.workers,
+                     iscity:data.index_isCity,
 
                      isVan:data.index_carType,
                      vanType:van,
