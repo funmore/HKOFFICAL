@@ -129,8 +129,8 @@
 
 <!-- 是否城六区 -->
 <view class="section isOffWorkTime">
-  <view class="name">
-    是否城六区
+  <view class="name" bindlongpress="OnLongPress" id="sixDis">
+    是否城六区?长按
   </view>
   <view class="content">
     <switch  bindchange="switchIsCityChange"/>

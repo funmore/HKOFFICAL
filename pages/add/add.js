@@ -86,6 +86,21 @@ Page({
       }
 
   },
+  OnLongPress:function(e){
+      var id=e.currentTarget.id;
+      var title=null;
+      var content=null;
+      if(id=="sixDis"){
+          title="什么是城六区？";
+          content="东城/西城/海淀/朝阳/石景山/大兴/首都机场";
+      }
+      wx.showModal({
+        title: title,
+        content:content,
+        showCancel:false,
+      });
+
+  },
   getManager(){
       var that =this;
       var timestamp = Date.parse(new Date());
@@ -274,7 +289,7 @@ Page({
     checkPassengerNum(){
         var isPassengerNum=true;
         if(this.data.index_isCity==1){
-          if(this.data.passengerNum<3)
+          if(this.data.passengerNum<4)
             isPassengerNum=false;
         }else{
           if(this.data.passengerNum<1)
@@ -285,7 +300,7 @@ Page({
   checkInput(){
     var errorMessage=new Array();
     errorMessage[0]="非城六区出行至少1人";
-    errorMessage[1]="城六区出行至少3人";
+    errorMessage[1]="城六区出行至少4人";
     errorMessage[2]="所领导未选择";
     errorMessage[3]="出发地为空";
     errorMessage[4]="目的地为空";
@@ -334,7 +349,7 @@ Page({
         errorMessageToShow.push(errorMessage[0]);
       }
     }else{
-      if(this.data.passengerNum<3){
+      if(this.data.passengerNum<4){
         isPassengerNum=false;
         errorMessageToShow.push(errorMessage[1]);
       }
