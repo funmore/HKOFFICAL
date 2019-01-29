@@ -12,6 +12,17 @@
 </view>
 <!-- 申请人 -->
 
+<!-- 是否涉密 -->
+<view class="section">
+  <view class="name">
+    是否涉密
+  </view>
+  <view class="content">
+    <switch  bindchange="switchIsSecretChange"/>
+  </view>
+</view>
+<!-- 是否涉密 -->
+
 <!-- 用车类型 -->
 <view class="section">
   <view class="name">

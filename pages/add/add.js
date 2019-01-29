@@ -25,6 +25,7 @@ Page({
     index_reasons:0,
 
     leaders:new Array(),
+    index_isSecret:0,
     index_oneOrTwoWay: 0,
     array_manager:new Array(),
     index_manager:0,
@@ -259,6 +260,17 @@ Page({
       index_oneOrTwoWay: index
     })
   },
+  switchIsSecretChange: function(e) {
+    var index=0;
+    if(e.detail.value){
+      index=1;
+    }else{
+      index=0;
+    }
+    this.setData({
+      index_isSecret: index
+    })
+  },
   switchIsCityChange:function(e){
     var index=0;
     if(e.detail.value){
@@ -439,6 +451,7 @@ Page({
                      t:timestamp,
                      s:sha1.hex_sha1(app.data.key+timestamp),
                      
+                     isSecret:data.index_isSecret,
                      usetime:data.date+' '+data.time+':00',
                      type:data.index_yongCheLeiXing,
                      manager:manager,

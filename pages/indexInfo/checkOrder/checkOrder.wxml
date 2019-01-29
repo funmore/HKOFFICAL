@@ -42,6 +42,18 @@
   </view>
 </view>
 
+<view class="section">
+  <view class="name">
+     是否涉密
+  </view>
+  <view class="content">
+    <view wx:if="{{item.is_secret}}">
+    是
+    </view>
+    <view wx:else> 否 </view>
+  </view>
+</view>
+
  <view class="section ">
   <view class="name">
      申请用车时间

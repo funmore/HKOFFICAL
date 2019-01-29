@@ -7,13 +7,15 @@ Page({
       {name: 'a', value: '马卫华'},
       {name: 'b', value: '栾健'},
       {name: 'c', value: '杨东山'},
-      {name: 'd', value: '齐春棠'},
-      {name: 'e', value: '曾思'},
-      {name: 'f', value: '王帅'},
-      {name: 'g', value: '李德武'},
-      {name: 'h', value: '杨文军'},
-      {name: 'i', value: '刘靖'},
-      {name: 'j', value: '王知非'}
+      {name: 'd', value: '曾思'},
+      {name: 'e', value: '王帅'},
+      {name: 'f', value: '李德武'},
+      {name: 'g', value: '杨文军'},
+      {name: 'h', value: '刘靖'},
+      {name: 'i', value: '王知非'},
+      {name: 'j', value: '禹春梅' },
+      {name: 'k', value: '李磊' },
+      {name: 'l', value: '王大勇' }
       
     ]
   },
