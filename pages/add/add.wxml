@@ -121,7 +121,7 @@
   </view>
   <view class="content Picker line">
             <view class="timePicker">
-              <picker mode="date" value="{{date}}" start="{{date}}" end="2018-09-01" bindchange="bindDateChange">
+              <picker mode="date" value="{{date}}" start="{{date}}" end="2025-09-01" bindchange="bindDateChange">
                 <view class="picker">
                    {{date}}
                 </view>
